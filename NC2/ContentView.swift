@@ -4,13 +4,14 @@
 //
 //  Created by Jongmin on 6/17/24.
 //
-
 import SwiftUI
 
 struct ContentView: View {
     @State private var isStarted = false
     @State private var elapsedTime = 0.0
     @State private var timer: Timer?
+    @State var isShowingDevice = false
+    @StateObject var bluetoothManager = BluetoothManager()
 
     var body: some View {
         VStack {
@@ -43,7 +44,7 @@ struct ContentView: View {
                     HStack {
                         Text("진동을 따라 목표를 찾아보세요")
                             .font(.system(size: 36))
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .fontWeight(.bold)
                             .foregroundColor(.white)
                             .padding()
                         Spacer()
@@ -60,21 +61,31 @@ struct ContentView: View {
                             .cornerRadius(38)
                     }
                     Button(action: {
-                        self.startStopwatch()
+                        self.isShowingDevice.toggle()
                     }) {
                         Text("기기 설정")
                             .font(.system(size: 13))
                             .foregroundColor(.gray)
-                            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                            .frame(maxWidth: .infinity)
                             .frame(height: 16)
                             .padding(.bottom, 106)
+                    }
+                    .sheet(isPresented: $isShowingDevice) {
+                        DeviceSelectView(bluetoothManager: bluetoothManager, isShowingDevice: $isShowingDevice)
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Image("GradiBGOG").ignoresSafeArea())
             }
         }
-        
+        .onAppear{bluetoothManager.stopHapticFeedback()}
+        .onChange(of: isStarted) { started in
+            if started {
+                bluetoothManager.startHapticFeedback()
+            } else {
+                bluetoothManager.stopHapticFeedback()
+            }
+        }
     }
 
     func startStopwatch() {

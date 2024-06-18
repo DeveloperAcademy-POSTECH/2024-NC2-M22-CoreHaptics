@@ -5,8 +5,10 @@
 //  Created by Jongmin on 6/17/24.
 //
 
+import Foundation
 import CoreBluetooth
-import SwiftUI
+import CoreHaptics
+import UIKit
 
 // Identifiable 확장 추가
 extension CBPeripheral: Identifiable {
@@ -14,16 +16,17 @@ extension CBPeripheral: Identifiable {
         return identifier
     }
 }
-
 class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var centralManager: CBCentralManager!
     @Published var peripherals: [CBPeripheral] = []
     @Published var connectedPeripheral: CBPeripheral?
     @Published var distance: Double?
-    
+    private var hapticEngine: CHHapticEngine?
+
     override init() {
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil)
+        createHapticEngine()
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -42,18 +45,17 @@ class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CB
     
     func connectToPeripheral(_ peripheral: CBPeripheral) {
         centralManager.stopScan()
-        peripheral.delegate = self  // Delegate 설정
+        peripheral.delegate = self
         centralManager.connect(peripheral, options: nil)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         connectedPeripheral = peripheral
-        peripheral.delegate = self  // Delegate 설정
+        peripheral.delegate = self
         peripheral.discoverServices(nil)
-        peripheral.readRSSI()  // 연결 후 RSSI 읽기 시작
+        peripheral.readRSSI()
     }
 
-    // CBPeripheralDelegate 메서드 구현
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         if let error = error {
             print("Error discovering services: \(error.localizedDescription)")
@@ -84,23 +86,25 @@ class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CB
     
     func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
         if let error = error {
-            print("Error reading RSSI: \(error.localizedDescription)")
+            print("Failed to read RSSI: \(error.localizedDescription)")
             return
         }
         
         let rssiValue = RSSI.doubleValue
-        distance = calculateDistance(rssi: rssiValue)
-        
-        // 주기적으로 RSSI 읽기
+        let distance = calculateDistance(rssi: rssiValue)
+        DispatchQueue.main.async {
+            self.distance = distance
+            self.provideHapticFeedback(for: distance)
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             peripheral.readRSSI()
         }
     }
     
     func calculateDistance(rssi: Double) -> Double {
-        let txPower = -59 // 기본 Tx 파워 값, 필요에 따라 조정
+        let txPower = -59
         if rssi == 0 {
-            return -1.0 // 측정 불가
+            return -1.0
         }
         let ratio = rssi / Double(txPower)
         if ratio < 1.0 {
@@ -108,6 +112,50 @@ class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CB
         } else {
             let distance = (0.89976) * pow(ratio, 7.7095) + 0.111
             return distance
+        }
+    }
+    
+    private func createHapticEngine() {
+        do {
+            hapticEngine = try CHHapticEngine()
+            try hapticEngine?.start()
+        } catch let error {
+            print("Haptic engine Creation Error: \(error.localizedDescription)")
+        }
+    }
+    
+    func startHapticFeedback() {
+        guard let hapticEngine = hapticEngine else { return }
+        hapticEngine.start(completionHandler: nil)
+    }
+    
+    func stopHapticFeedback() {
+        guard let hapticEngine = hapticEngine else { return }
+        hapticEngine.stop(completionHandler: nil)
+    }
+
+    private func provideHapticFeedback(for distance: Double) {
+        guard let hapticEngine = hapticEngine else { return }
+        
+        let intensity: Float = max(0.1, min(1.0, Float(1.0 - ((distance - 1.0) / 4.0))))
+        let sharpness: Float = intensity
+        
+        let hapticEvent = CHHapticEvent(
+            eventType: .hapticContinuous,
+            parameters: [
+                CHHapticEventParameter(parameterID: .hapticIntensity, value: intensity),
+                CHHapticEventParameter(parameterID: .hapticSharpness, value: sharpness)
+            ],
+            relativeTime: 0,
+            duration: 1.0
+        )
+        
+        do {
+            let pattern = try CHHapticPattern(events: [hapticEvent], parameters: [])
+            let player = try hapticEngine.makePlayer(with: pattern)
+            try player.start(atTime: CHHapticTimeImmediate)
+        } catch let error {
+            print("Failed to play pattern: \(error.localizedDescription)")
         }
     }
 }
