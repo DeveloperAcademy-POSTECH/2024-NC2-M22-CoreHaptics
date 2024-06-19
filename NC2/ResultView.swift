@@ -9,8 +9,13 @@ import SwiftUI
 import Lottie
 
 struct ResultView: View {
+    @Binding var isShownFullScreenCover : Bool
+    @Binding var successTime : String
+
     var body: some View {
         ZStack {
+            Color(.white)
+                .ignoresSafeArea()
             LottieView(animationFileName: "ResultEffect", loopMode: .loop) // Lottie 애니메이션 추가
                 .frame(width: 200, height: 200) // 원하는 크기로 조절
                 .padding(.bottom, 365)
@@ -23,7 +28,7 @@ struct ResultView: View {
                         .padding(.top, 170)
                 }
                 VStack {
-                    Text("00:00")
+                    Text(successTime)
                         .font(.system(size: 74))
                         .fontWeight(.thin)
                         .foregroundColor(.black)
@@ -32,11 +37,12 @@ struct ResultView: View {
                     Text("달성 시간")
                         .font(.system(size: 26))
                         .fontWeight(.regular)
+                        .foregroundColor(.black)
                 }
                 Spacer()
                 VStack {
                     Button(action: {
-                        
+                        isShownFullScreenCover = false
                     }, label: {
                         Text("처음으로")
                             .font(.system(size: 17))
@@ -52,8 +58,8 @@ struct ResultView: View {
     }
 }
 
-struct ResultView_Previews: PreviewProvider {
-    static var previews: some View {
-        ResultView()
-    }
-}
+//struct ResultView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ResultView()
+//    }
+//}

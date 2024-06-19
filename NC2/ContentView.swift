@@ -69,7 +69,7 @@ struct ContentView: View {
                             .font(.system(size: 36))
                             .fontWeight(.bold)
                             .foregroundColor(.white)
-                            .padding()
+                            .padding(EdgeInsets(top: 44, leading: 16, bottom: 0, trailing: 0))
                         Spacer()
                     }
                     Spacer()
@@ -82,6 +82,7 @@ struct ContentView: View {
                             .frame(width: 76, height: 76)
                             .background(Color.green)
                             .cornerRadius(38)
+                            .padding(.bottom, 106)
                     }
                     Button(action: {
                         self.isShowingDevice.toggle()
@@ -91,7 +92,6 @@ struct ContentView: View {
                             .foregroundColor(.gray)
                             .frame(maxWidth: .infinity)
                             .frame(height: 16)
-                            .padding(.bottom, 106)
                     }
                     .sheet(isPresented: $isShowingDevice) {
                         DeviceSelectView(bluetoothManager: bluetoothManager, isShowingDevice: $isShowingDevice)
@@ -117,20 +117,15 @@ struct ContentView: View {
             if let distance = distance, distance <= 0.05 {
                 isShownFullScreenCover = true
                 successTime = timeString(time: elapsedTime)
-                self.stopStopwatch()
                 bluetoothManager.stopScanning()
                 bluetoothManager.resetDistance()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                    self.stopStopwatch()
+                        })
             }
         }
         .fullScreenCover(isPresented: $isShownFullScreenCover) {
-            Text("성공!")
-            Text(successTime)
-            Button(action:{
-                isShownFullScreenCover.toggle()
-                bluetoothManager.stopHapticFeedback()
-            }, label:{
-                Text("그만")
-            })
+            ResultView(isShownFullScreenCover: $isShownFullScreenCover, successTime: $successTime)
         }
     }
     

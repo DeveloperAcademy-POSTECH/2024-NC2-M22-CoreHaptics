@@ -163,10 +163,10 @@ class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CB
             eventType: .hapticContinuous,
             parameters: [
                 CHHapticEventParameter(parameterID: .hapticIntensity, value: intensity),
-                CHHapticEventParameter(parameterID: .hapticSharpness, value: sharpness)
+                CHHapticEventParameter(parameterID: .hapticSharpness, value: sharpness),
             ],
             relativeTime: 0,
-            duration: 1.0
+            duration: 1
         )
 
         do {

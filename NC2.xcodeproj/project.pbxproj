@@ -14,6 +14,8 @@
 		6CEC62112C1FBFAA00698207 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CEC62102C1FBFAA00698207 /* Preview Assets.xcassets */; };
 		6CEC62182C1FC3AA00698207 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEC62172C1FC3AA00698207 /* BluetoothManager.swift */; };
 		904813182C21A499007F77F8 /* DeviceSelectSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904813172C21A499007F77F8 /* DeviceSelectSheet.swift */; };
+		90FF858D2C2279A30017511B /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FF858C2C2279A30017511B /* LottieView.swift */; };
+		90FF85902C227D6F0017511B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 90FF858F2C227D6F0017511B /* Lottie */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,7 @@
 		6CEC62102C1FBFAA00698207 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6CEC62172C1FC3AA00698207 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		904813172C21A499007F77F8 /* DeviceSelectSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSelectSheet.swift; sourceTree = "<group>"; };
+		90FF858C2C2279A30017511B /* LottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90FF85902C227D6F0017511B /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +66,7 @@
 				904813172C21A499007F77F8 /* DeviceSelectSheet.swift */,
 				6C08C4C02C2130AE00785485 /* ResultView.swift */,
 				6CEC62172C1FC3AA00698207 /* BluetoothManager.swift */,
+				90FF858C2C2279A30017511B /* LottieView.swift */,
 				6CEC620D2C1FBFAA00698207 /* Assets.xcassets */,
 				6CEC620F2C1FBFAA00698207 /* Preview Content */,
 			);
@@ -92,6 +97,9 @@
 			dependencies = (
 			);
 			name = NC2;
+			packageProductDependencies = (
+				90FF858F2C227D6F0017511B /* Lottie */,
+			);
 			productName = NC2;
 			productReference = 6CEC62062C1FBFA900698207 /* NC2.app */;
 			productType = "com.apple.product-type.application";
@@ -120,6 +128,9 @@
 				Base,
 			);
 			mainGroup = 6CEC61FD2C1FBFA900698207;
+			packageReferences = (
+				90FF858E2C227D6F0017511B /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = 6CEC62072C1FBFA900698207 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -151,6 +162,7 @@
 				6CEC62182C1FC3AA00698207 /* BluetoothManager.swift in Sources */,
 				6CEC620A2C1FBFA900698207 /* NC2App.swift in Sources */,
 				904813182C21A499007F77F8 /* DeviceSelectSheet.swift in Sources */,
+				90FF858D2C2279A30017511B /* LottieView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +378,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		90FF858E2C227D6F0017511B /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		90FF858F2C227D6F0017511B /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90FF858E2C227D6F0017511B /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6CEC61FE2C1FBFA900698207 /* Project object */;
 }
