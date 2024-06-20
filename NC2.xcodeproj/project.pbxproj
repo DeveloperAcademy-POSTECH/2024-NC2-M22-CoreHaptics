@@ -14,6 +14,7 @@
 		6CEC62112C1FBFAA00698207 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CEC62102C1FBFAA00698207 /* Preview Assets.xcassets */; };
 		6CEC62182C1FC3AA00698207 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEC62172C1FC3AA00698207 /* BluetoothManager.swift */; };
 		904813182C21A499007F77F8 /* DeviceSelectSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904813172C21A499007F77F8 /* DeviceSelectSheet.swift */; };
+		907CBF532C2454E7003ABE47 /* ResultHaptics.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 907CBF522C2454E7003ABE47 /* ResultHaptics.ahap */; };
 		90FF858D2C2279A30017511B /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FF858C2C2279A30017511B /* LottieView.swift */; };
 		90FF85902C227D6F0017511B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 90FF858F2C227D6F0017511B /* Lottie */; };
 /* End PBXBuildFile section */
@@ -27,6 +28,7 @@
 		6CEC62102C1FBFAA00698207 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6CEC62172C1FC3AA00698207 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		904813172C21A499007F77F8 /* DeviceSelectSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSelectSheet.swift; sourceTree = "<group>"; };
+		907CBF522C2454E7003ABE47 /* ResultHaptics.ahap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ResultHaptics.ahap; sourceTree = "<group>"; };
 		90FF858C2C2279A30017511B /* LottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +69,7 @@
 				6C08C4C02C2130AE00785485 /* ResultView.swift */,
 				6CEC62172C1FC3AA00698207 /* BluetoothManager.swift */,
 				90FF858C2C2279A30017511B /* LottieView.swift */,
+				907CBF522C2454E7003ABE47 /* ResultHaptics.ahap */,
 				6CEC620D2C1FBFAA00698207 /* Assets.xcassets */,
 				6CEC620F2C1FBFAA00698207 /* Preview Content */,
 			);
@@ -145,6 +148,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				907CBF532C2454E7003ABE47 /* ResultHaptics.ahap in Resources */,
 				6CEC62112C1FBFAA00698207 /* Preview Assets.xcassets in Resources */,
 				6CEC620E2C1FBFAA00698207 /* Assets.xcassets in Resources */,
 			);

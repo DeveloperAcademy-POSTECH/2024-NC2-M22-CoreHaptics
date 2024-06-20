@@ -82,8 +82,7 @@ struct ContentView: View {
                             .frame(width: 76, height: 76)
                             .background(Color.green)
                             .cornerRadius(38)
-                            .padding(.bottom, 106)
-                    }
+                    }.padding(.bottom, 106)
                     Button(action: {
                         self.isShowingDevice.toggle()
                     }) {
@@ -125,7 +124,7 @@ struct ContentView: View {
             }
         }
         .fullScreenCover(isPresented: $isShownFullScreenCover) {
-            ResultView(isShownFullScreenCover: $isShownFullScreenCover, successTime: $successTime)
+            ResultView(isShownFullScreenCover: $isShownFullScreenCover, successTime: $successTime, bluetoothManager: bluetoothManager)
         }
     }
     

@@ -126,16 +126,6 @@ class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CB
         }
     }
 
-    func startHapticFeedback() {
-        guard let hapticEngine = hapticEngine else { return }
-        hapticEngine.start(completionHandler: nil)
-    }
-
-    func stopHapticFeedback() {
-        guard let hapticEngine = hapticEngine else { return }
-        hapticEngine.stop(completionHandler: nil)
-    }
-
     func startScanning() {
         if let connectedPeripheral = connectedPeripheral {
             connectedPeripheral.readRSSI()
@@ -153,6 +143,16 @@ class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CB
         distance = nil
     }
 
+    func startHapticFeedback() {
+        guard let hapticEngine = hapticEngine else { return }
+        hapticEngine.start(completionHandler: nil)
+    }
+
+    func stopHapticFeedback() {
+        guard let hapticEngine = hapticEngine else { return }
+        hapticEngine.stop(completionHandler: nil)
+    }
+    
     private func provideHapticFeedback(for distance: Double) {
         guard let hapticEngine = hapticEngine else { return }
 
@@ -173,6 +173,22 @@ class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CB
             let pattern = try CHHapticPattern(events: [hapticEvent], parameters: [])
             let player = try hapticEngine.makePlayer(with: pattern)
             try player.start(atTime: CHHapticTimeImmediate)
+        } catch let error {
+            print("Failed to play pattern: \(error.localizedDescription)")
+        }
+    }
+    
+    func celebrationHapticFeedback() {
+        guard let hapticEngine = hapticEngine else { return }
+
+        guard let path = Bundle.main.path(forResource: "ResultHaptics", ofType: "ahap") else {
+            print("AHAP 파일을 찾을 수 없습니다.")
+            return
+        }
+        
+        do {
+            let ahapData = try? Data(contentsOf: URL(fileURLWithPath: path))
+            try? hapticEngine.playPattern(from: URL(fileURLWithPath: path))
         } catch let error {
             print("Failed to play pattern: \(error.localizedDescription)")
         }

@@ -11,7 +11,9 @@ import Lottie
 struct ResultView: View {
     @Binding var isShownFullScreenCover : Bool
     @Binding var successTime : String
-
+    @ObservedObject var bluetoothManager: BluetoothManager
+    @State private var timer: Timer?
+    
     var body: some View {
         ZStack {
             Color(.white)
@@ -19,6 +21,14 @@ struct ResultView: View {
             LottieView(animationFileName: "ResultEffect", loopMode: .loop) // Lottie 애니메이션 추가
                 .frame(width: 200, height: 200) // 원하는 크기로 조절
                 .padding(.bottom, 365)
+                .onAppear{
+                    timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
+                        bluetoothManager.celebrationHapticFeedback()
+                    }
+                }
+                .onDisappear{
+                    timer?.invalidate()
+                }
             VStack {
                 VStack {
                     Text("축하합니다!")
