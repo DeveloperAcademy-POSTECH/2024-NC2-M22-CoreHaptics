@@ -23,5 +23,6 @@ Core Haptics
 <img width="1464" alt="image" src="https://github.com/DeveloperAcademy-POSTECH/2024-NC2-M22-CoreHaptics/assets/130440930/06aea6dc-e99e-4180-b417-9643bc4173ba">
 
 ## 🛠️ About Code
-<img width="1022" alt="image" src="https://github.com/DeveloperAcademy-POSTECH/2024-NC2-M22-CoreHaptics/assets/130440930/78b8dbd3-e57e-4ee3-bd47-7befa1ca9bc7">
+<img width="1479" alt="image" src="https://github.com/DeveloperAcademy-POSTECH/2024-NC2-M22-CoreHaptics/assets/130440930/dcd9bbdf-425a-49d1-a9fc-4d0c09ed359a">
+
 
