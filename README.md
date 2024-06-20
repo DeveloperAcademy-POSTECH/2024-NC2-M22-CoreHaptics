@@ -1,4 +1,4 @@
-# 2024-NC2-M0-AugmentedReality
+# 2024-NC2-M22-CoreHaptics
 ## 🎥 Youtube Link
 (추후 만들어진 유튜브 링크 추가)
 
