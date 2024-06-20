@@ -3,21 +3,25 @@
 (추후 만들어진 유튜브 링크 추가)
 
 ## 💡 About Augmented Reality
-(해당 기술에 대한 조사 내용 정리)
+Core Haptics
+: 사용자의 촉각을 활용하여 물리적 세계의 친숙한 경험을 앱에 활용
 
-> **예시** <br/><br/>
-_(내용 중략) <br/>
-ARKit에서 ARSCNView가 있다는 것을 알게 되었고, ARSCNView에서는 SceneKit을 활용하여 3D 콘텐츠를 증강하여 추가할 수 있다는 것을 알게 되었다. <br/>
-(내용 중략)_
+- 액션 : 유저를 물리적으로 집중시키기 위한 피드백 액션이 동작함
+- 사용자 경험 : 햅틱이 시각적, 청각적, 촉각적 피드백이 조화롭게 조합되는 경우 사용자 경험은 더 일관되고 자연스러워 집니다.
+- 햅틱 패턴 : 진동의 세기와 날카로움을 조정하여 다양한 진동 효과를 생성할 수 있음
+- 사용 사례 : 알림이나 Apply Pay 거래 확인 / 트랙패드에서 드래그, 클릭 강도에 반응 / 게임 컨트롤러 진동 피드백 제공
 
 ## 🎯 What we focus on?
-> **예시** <br/> ARKit에서 ARSCNView를 활용하고, SCNText를 사용하여 쉽게 3D 텍스트를 생성하고 SCNAction을 통해 쉽게 에니메이션을 추가한다.
+- 햅틱 액션이 메인기능이 될 수 있는 서비스를 제작하기로 함
+- 햅틱은 Intensity, Sharpness, Duration 등을 조절하여, 사용자에게 피드백으로 제공함
+- CoreBluetooth 활용하여 2개의 기기 거리를 측정 : 거리에 따라서 Haptic 의 Intensity(강도), Sharpness(날카로움) 정도를 패턴화
 
 ## 💼 Use Case
-> **예시** <br/> 내 친구의 닉네임을 친구의 머리 위에 3D로 띄우고, 인터렉션하여 탭 할 때 움직이게 할 수 있다.
+진동으로 목표물을 찾는 게임을 만들어보자!
 
 ## 🖼️ Prototype
-(프로토타입과 설명 추가)
+<img width="1464" alt="image" src="https://github.com/DeveloperAcademy-POSTECH/2024-NC2-M22-CoreHaptics/assets/130440930/06aea6dc-e99e-4180-b417-9643bc4173ba">
 
 ## 🛠️ About Code
-(핵심 코드에 대한 설명 추가)
+<img width="1022" alt="image" src="https://github.com/DeveloperAcademy-POSTECH/2024-NC2-M22-CoreHaptics/assets/130440930/78b8dbd3-e57e-4ee3-bd47-7befa1ca9bc7">
+
